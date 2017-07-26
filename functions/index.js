@@ -198,6 +198,7 @@ function badRequest(response, message) {
 */
 function getLang(locale) {
 	
-	return locale.substring(0, 2);
+	return "en";
+	//return locale.substring(0, 2);
 
 }

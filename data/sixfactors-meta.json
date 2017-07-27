@@ -1,0 +1,365 @@
+{
+  "questions":
+  {
+    "0": {
+      "label": {
+        "en": "Takes initiatives.",
+        "fr": "Prend des initiatives."
+      }
+    },
+    "1": {
+      "label": {
+        "en": "Takes care of people.",
+        "fr": "Se préoccupe des personnes."
+      }
+    },
+    "2": {
+      "label": {
+        "en": "Enjoys to be alone.",
+        "fr": "Apprécie la solitude."
+      }
+    },
+    "3": {
+      "label": {
+        "en": "Listens more than talks.",
+        "fr": "Écoute plus que ne parle."
+      }
+    },
+    "4": {
+      "label": {
+        "en": "Feels rarely tired.",
+        "fr": "Se sent rarement fatigué."
+      }
+    },
+    "5": {
+      "label": {
+        "en": "Has original opinions.",
+        "fr": "A des opinions originales."
+      }
+    },
+    "6": {
+      "label": {
+        "en": "Concerned about the changes.",
+        "fr": "Préoccupé par les changements."
+      }
+    },
+    "7": {
+      "label": {
+        "en": "Does not feel emotional.",
+        "fr": "Ne ressent pas d'émotion."
+      }
+    },
+    "8": {
+      "label": {
+        "en": "Looks for people to join.",
+        "fr": "Cherche des personnes avec qui se joindre."
+      }
+    },
+    "9": {
+      "label": {
+        "en": "Likes to be in charge of something.",
+        "fr": "Aime être en charge de quelque chose."
+      }
+    },
+    "10": {
+      "label": {
+        "en": "Sometimes feels diminished.",
+        "fr": "Se sent parfois diminuer."
+      }
+    },
+    "11": {
+      "label": {
+        "en": "Does not trust his imagination.",
+        "fr": "Ne fait pas confiance à son imagination."
+      }
+    },
+    "12": {
+      "label": {
+        "en": "Easily distracted.",
+        "fr": "Facilement distrait."
+      }
+    },
+    "13": {
+      "label": {
+        "en": "Overwhelmed by the negative remarks.",
+        "fr": "Bouleversé par les remarques négatives."
+      }
+    },
+    "14": {
+      "label": {
+        "en": "Bored during social events.",
+        "fr": "S'ennuie pendant les évènements sociaux."
+      }
+    },
+    "15": {
+      "label": {
+        "en": "Does not argue.",
+        "fr": "Ne se dispute pas."
+      }
+    },
+    "16": {
+      "label": {
+        "en": "Has more energy than most.",
+        "fr": "A plus d'énergie que la plupart."
+      }
+    },
+    "17": {
+      "label": {
+        "en": "Shares his ideas.",
+        "fr": "Fait partager ses idées."
+      }
+    },
+    "18": {
+      "label": {
+        "en": "Cautious.",
+        "fr": "Précautionneux."
+      }
+    },
+    "19": {
+      "label": {
+        "en": "Takes tough decisions.",
+        "fr": "Prend des décisions difficiles."
+      }
+    },
+    "20": {
+      "label": {
+        "en": "Integrated by other people.",
+        "fr": "Intégré par les autres personnes."
+      }
+    },
+    "21": {
+      "label": {
+        "en": "Often takes command.",
+        "fr": "Prend souvent le commandement."
+      }
+    },
+    "22": {
+      "label": {
+        "en": "Sometimes needs to rest.",
+        "fr": "A parfois besoin de se reposer."
+      }
+    },
+    "23": {
+      "label": {
+        "en": "Has traditional opinions.",
+        "fr": "A des opinions traditionnelles."
+      }
+    },
+    "24": {
+      "label": {
+        "en": "Bored by routine.",
+        "fr": "Ennuyé par la routine."
+      }
+    },
+    "25": {
+      "label": {
+        "en": "Sensitive to criticism.",
+        "fr": "Sensible aux critiques."
+      }
+    },
+    "26": {
+      "label": {
+        "en": "Socialize only if necessary.",
+        "fr": "Socialise uniquement si c'est nécessaire."
+      }
+    },
+    "27": {
+      "label": {
+        "en": "Accepts the decisions of other people.",
+        "fr": "Accepte les décisions d'autres personnes."
+      }
+    },
+    "28": {
+      "label": {
+        "en": "Very active.",
+        "fr": "Très actif."
+      }
+    },
+    "29": {
+      "label": {
+        "en": "Has invented something.",
+        "fr": "A inventé quelque chose."
+      }
+    },
+    "30": {
+      "label": {
+        "en": "Does not like uncertainty.",
+        "fr": "N'aime pas l'incertitude."
+      }
+    },
+    "31": {
+      "label": {
+        "en": "Is limited to facts.",
+        "fr": "Se limite aux faits."
+      }
+    },
+    "32": {
+      "label": {
+        "en": "Integrates other people.",
+        "fr": "Intègre d'autres personnes."
+      }
+    },
+    "33": {
+      "label": {
+        "en": "Influences people.",
+        "fr": "Influence les gens."
+      }
+    },
+    "34": {
+      "label": {
+        "en": "Can not always cope.",
+        "fr": "Ne peut pas toujours faire face."
+      }
+    },
+    "35": {
+      "label": {
+        "en": "Is wary of new ideas.",
+        "fr": "Se méfie des nouvelles idées."
+      }
+    },
+    "36": {
+      "label": {
+        "en": "Likes taking risks.",
+        "fr": "Aime prendre des risques."
+      }
+    },
+    "37": {
+      "label": {
+        "en": "Is rather 'sweet-heart'.",
+        "fr": "Plutôt 'coeur-tendre'."
+      }
+    },
+    "38": {
+      "label": {
+        "en": "Loves his own company.",
+        "fr": "Aime sa propre compagnie."
+      }
+    },
+    "39": {
+      "label": {
+        "en": "Lets others take the initiative.",
+        "fr": "Laisse les autres prendre les initiatives."
+      }
+    },
+    "40": {
+      "label": {
+        "en": "Always busy.",
+        "fr": "Toujours occupé."
+      }
+    },
+    "41": {
+      "label": {
+        "en": "Improves the way things are done.",
+        "fr": "Améliore la façon dont les choses sont faites."
+      }
+    },
+    "42": {
+      "label": {
+        "en": "Finishes things cleanly.",
+        "fr": "Finit les choses proprement."
+      }
+    },
+    "43": {
+      "label": {
+        "en": "Has a strong will.",
+        "fr": "A une forte volonté."
+      }
+    },
+    "44": {
+      "label": {
+        "en": "Is most often accompanied by someone.",
+        "fr": "Est le plus souvent accompagné de quelqu'un."
+      }
+    },
+    "45": {
+      "label": {
+        "en": "Likes his orders to be followed.",
+        "fr": "Aime que ses ordres soient suivies."
+      }
+    },
+    "46": {
+      "label": {
+        "en": "Lacks of determination.",
+        "fr": "Manque de détermination."
+      }
+    },
+    "47": {
+      "label": {
+        "en": "Has a classic mind.",
+        "fr": "A un esprit classique."
+      }
+    },
+    "48": {
+      "label": {
+        "en": "Can adapt to change.",
+        "fr": "Peut s'adapter au changement."
+      }
+    },
+    "49": {
+      "label": {
+        "en": "Avoids arguing with people.",
+        "fr": "Évite de se disputer avec les gens."
+      }
+    },
+    "50": {
+      "label": {
+        "en": "Works better alone.",
+        "fr": "Travaille mieux seul."
+      }
+    },
+    "51": {
+      "label": {
+        "en": "Tends to hold back.",
+        "fr": "A tendance à se retenir."
+      }
+    },
+    "52": {
+      "label": {
+        "en": "Works during his leisure hours.",
+        "fr": "Travaille pendant ses heures de loisirs."
+      }
+    },
+    "53": {
+      "label": {
+        "en": "Has flashes of inspiration.",
+        "fr": "A des éclairs d'inspiration."
+      }
+    },
+    "54": {
+      "label": {
+        "en": "Loves things to stay the same.",
+        "fr": "Aime que les choses restent les mêmes."
+      }
+    },
+    "55": {
+      "label": {
+        "en": "Demonstrates firmness with people.",
+        "fr": "Fait preuve de fermeté avec les gens."
+      }
+    },
+    "56": {
+      "label": {
+        "en": "Try to learn to know people.",
+        "fr": "Essaie d'apprendre à connaitre les gens."
+      }
+    },
+    "57": {
+      "label": {
+        "en": "Takes control.",
+        "fr": "Prend le contrôle."
+      }
+    },
+    "58": {
+      "label": {
+        "en": "Sometimes want to give up.",
+        "fr": "A parfois envi d'abandonner."
+      }
+    },
+    "59": {
+      "label": {
+        "en": "Has fear of change.",
+        "fr": "A peur du changement."
+      }
+    }
+  }
+}

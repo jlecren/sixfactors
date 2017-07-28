@@ -4,13 +4,10 @@ const admin = require('firebase-admin');
 
 admin.initializeApp(functions.config().firebase);
 
-
-const sixfactors = require('./data/sixfactors')
-
 /*
-	Map the answer text to the answer code.
+Load the sixfactors metadata
 */
-const ANSWER_CODES = sixfactors.answerCodes;
+const sixfactors = require('./data/sixfactors');
 
 /*
 Set english as the default language.
@@ -210,10 +207,10 @@ exports.sixfactorsSaveAnswer = functions.https.onRequest((request, response) => 
 */
 function getAnswerCode(lang, userAnswer) {
 
-	var codeMap = ANSWER_CODES[lang];
+	var codeMap = sixfactors.answerCodes[lang];
 
 	if( codeMap === undefined || codeMap === null ) {
-		codeMap = ANSWER_CODES[lang];
+		codeMap = sixfactors.answerCodes[lang];
 	}
 
 	return codeMap[userAnswer];

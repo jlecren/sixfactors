@@ -4,28 +4,18 @@ const admin = require('firebase-admin');
 
 admin.initializeApp(functions.config().firebase);
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.json({ "messages": [ { "text": "Hello from Firebase!" } ] });
-// });
+
+const sixfactors = require('./data/sixfactors')
 
 /*
 	Map the answer text to the answer code.
 */
-const answerCodeMapPerLang = {
-	"en": {
-		"I disagree": -3,
-		"I don't know": 0,
-		"I agree": 3
-	},
-	"fr": {
-		"Je désapprouve": -3,
-		"Je ne sais pas": 0,
-		"J'approuve": 3
-	}
-}
+const ANSWER_CODES = sixfactors.answerCodes;
+
+/*
+Set english as the default language.
+*/
+const DEFAULT_LANG = "en";
 
 /*
 	Get the next 6 factors question given the previous question id
@@ -98,26 +88,23 @@ exports.sixfactorsGetNextQuestion = functions.https.onRequest((request, response
 
   	console.log("__fetchQuestion: questionId = " + questionId );
 
-  	const questionRef = admin.database().ref('/sixfactors/meta/questions').child(questionId);
+  	const question = sixfactors.questions[questionId];
 
-  	return questionRef.once('value')
-  	.then( (questionSnapshot) => {
+  	if( question === undefined ) {
+  		return __endOfTest("The question " + questionId + " doesn't exist.")
+  	}
 
-  		if( !questionSnapshot.exists() ) {
-  			return __endOfTest("The question doesn't exist.");
-  		}
+  	var questionLabel = question.label[lang];
 
-  		const questionLabel = questionSnapshot.child("label").child(lang).val();
-
-  		console.log("__fetchQuestion => id: " + questionId +" label: " + questionLabel );
-
-  		return {
-  			"isComplete": false,
-  			"id": questionId,
-  			"label": questionLabel
-  		}
-
-  	});
+  	if( questionLabel === undefined ) {
+  		questionLabel = question.label[DEFAULT_LANG];
+  	}
+  	
+  	return {
+		"isComplete": false,
+		"id": questionId,
+		"label": questionLabel
+	};
   }
 
   const __createResponse = (question) => {
@@ -138,7 +125,7 @@ exports.sixfactorsGetNextQuestion = functions.https.onRequest((request, response
   
 
   // Get the last question id for this user if the parameter is not valid
-  var lastQuestionIndex = parseInt(lastQuestionId, 10);
+  const lastQuestionIndex = parseInt(lastQuestionId, 10);
   var promise;
 
   if( isNaN(lastQuestionIndex) ) {
@@ -223,10 +210,10 @@ exports.sixfactorsSaveAnswer = functions.https.onRequest((request, response) => 
 */
 function getAnswerCode(lang, userAnswer) {
 
-	var codeMap = answerCodeMapPerLang[lang];
+	var codeMap = ANSWER_CODES[lang];
 
 	if( codeMap === undefined || codeMap === null ) {
-		codeMap = answerCodeMapPerLang[lang];
+		codeMap = ANSWER_CODES[lang];
 	}
 
 	return codeMap[userAnswer];
@@ -270,7 +257,7 @@ function badRequest(response, message) {
 */
 function getLang(locale) {
 	
-	return "en";
+	return DEFAULT_LANG;
 	//return locale.substring(0, 2);
 
 }

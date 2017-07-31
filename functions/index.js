@@ -151,7 +151,7 @@ exports.sixfactorsGetNextQuestion = functions.https.onRequest((request, response
 exports.sixfactorsSaveAnswer = functions.https.onRequest((request, response) => {
 
 
-  console.log("sixfactorsSetAnswer : " + JSON.stringify(request.body) );
+  console.log("sixfactorsSaveAnswer : " + JSON.stringify(request.body) );
   
   // Grab the chatfuel user ID parameter.
   const userId     = request.body["chatfuel user id"];
@@ -196,6 +196,161 @@ exports.sixfactorsSaveAnswer = functions.https.onRequest((request, response) => 
   .then(function() {
 	response.end();
   });
+	
+});
+
+/*
+	Compute the result of the test for a given user.
+	params:
+	 - "chat user id"   : the user id in Chatfuel
+	 - "locale"         : the current user's locale
+*/
+exports.sixfactorsComputeTestResult = functions.https.onRequest((request, response) => {
+
+
+  console.log("sixfactorsComputeTestResult : " + JSON.stringify(request.query) );
+  
+  // Grab the chatfuel user ID parameter.
+  const userId     = request.query["chatfuel user id"];
+  // Grab the current user locale
+  const locale     = request.query["locale"];
+
+  if( !verifyParam(userId) ) {
+  	badRequest(response, "Unable to find the user id.");
+  	return;
+  }
+
+  if( !verifyParam(locale) ) {
+  	badRequest(response, "Unable to find the user locale.");
+  	return;
+  }
+
+  const lang = getLang(locale);
+
+  // CALLBACKS
+  const __fetchAnswers = (userId) => {
+
+  	console.log("Fetch the answers for the userId : " + userId);
+
+  	const userAnswersRef = admin.database().ref('/sixfactors/answers').child(userId);
+
+  	return userAnswersRef.once('value')
+  	.then( (dataSnapshot ) => {
+
+  		console.log("Fetching successed.");
+
+  		if( !dataSnapshot.exists() ) {
+  			return {};
+  		}
+
+  		var answers = dataSnapshot.val();
+
+  		delete answers.lastQuestionId;
+
+  		return answers;
+
+  	});
+  };
+
+  const __doProjectionOnAxis = ( answers ) => {
+
+  	console.log("Projects the answers on axis : " + JSON.stringify( answers ) );
+
+  	var axis = {
+  		"casualness":   0,
+  		"toughness":    0,
+  		"independence": 0,
+  		"controlling":  0,
+  		"energy":       0,
+  		"creativity":   0,
+  	};
+
+  	for (var questionId in answers) {
+	    if (answers.hasOwnProperty(questionId)) {
+	        
+	    	var answerCode = answers[questionId];
+	    	var question   = sixfactors.questions[questionId];
+	    	var range      = question.matches.range;
+
+	    	if( answerCode >= range[0] && answerCode <= range[1] ) {
+	    		axis[question.matches.dimension]++;
+	    	}
+
+	    }
+	}
+
+	return axis;
+
+  };
+
+  const __doTestResultAnalysis = ( axis ) => {
+
+  	console.log("Perform the analysis of the projection : " + JSON.stringify( axis ) );
+
+  	const __getAnalysis = (domain, dimension, score) => {
+
+  		const levels = sixfactors.analysis[domain].dimensions[dimension].levels;
+
+  		for( level of levels ) {
+
+  			if( level.range[0] >= score && level.range[1] <= score ) {
+  				return level;
+  			}
+
+  		}
+
+  		return levels[0];
+
+  	};
+
+  	return {
+  		"axis": axis,
+  		"organization": {
+			"casualness": __getAnalysis("organization", "casualness", axis["casualness"] ),
+			"toughness":  __getAnalysis("organization", "toughness", axis["toughness"] )
+		},
+		"interaction": {
+			"independence": __getAnalysis("interaction", "independence", axis["independence"] ),
+			"controlling":  __getAnalysis("interaction", "controlling", axis["controlling"] )
+		},
+		"enthusiasm": {
+			"energy":     __getAnalysis("enthusiasm", "energy", axis["energy"] ),
+			"creativity": __getAnalysis("enthusiasm", "creativity", axis["creativity"] )
+		}
+  	};
+
+  }
+
+  const __createResponse = ( analysis ) => {
+
+	console.log("Create the HTTP response for the analysis : " + JSON.stringify( analysis ) );
+
+	response.json( {
+		"set_attributes": 
+		{
+			"orgCasualnessLabel":   analysis["organization"]["casualness"].label[lang],
+			"orgCasualnessDesc":    analysis["organization"]["casualness"].description[lang],
+			"orgToughnessLabel":    analysis["organization"]["toughness"].label[lang],
+			"orgToughnessDesc":     analysis["organization"]["toughness"].description[lang],
+			"intIndependenceLabel": analysis["interaction"]["independence"].label[lang],
+			"intIndependenceDesc":  analysis["interaction"]["independence"].description[lang],
+			"intControllingLabel":  analysis["interaction"]["controlling"].label[lang],
+			"intControllingDesc":   analysis["interaction"]["controlling"].description[lang],
+			"entEnergyLabel":       analysis["enthusiasm"]["energy"].label[lang],
+			"entEnergyDesc":        analysis["enthusiasm"]["energy"].description[lang],
+			"entCreativityLabel":   analysis["enthusiasm"]["creativity"].label[lang],
+			"entCreativityDesc":    analysis["enthusiasm"]["creativity"].description[lang],
+		}
+	} ); 
+
+  };
+
+  //END OF CALLBACKS
+
+  __fetchAnswers( userId )
+  .then( __doProjectionOnAxis )
+  .then( __doTestResultAnalysis )
+  .then( __createResponse );
 	
 });
 

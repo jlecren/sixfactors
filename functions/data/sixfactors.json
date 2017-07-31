@@ -6,9 +6,9 @@
       "I agree": 3
     },
     "fr": {
-      "Je désapprouve": -3,
-      "Je ne sais pas": 0,
-      "J'approuve": 3
+      "Désapprouve": -3,
+      "Ne sais pas": 0,
+      "Approuve": 3
     }
   },
   "dimensions": {
@@ -817,7 +817,7 @@
               },
               "description": {
                 "en": "You take into account the facts and feelings. A good planner and reliable, you are also attentive, to others. You express your thoughts on the issues without blaming others. You take reasonable initiatives by yourself, while recognizing the talent of others.",
-                "fr": "Vous prenez en compte les faits ainsi les sentiments. Un bon planificateur et fiable, vous êtes également attentif, aux autres. Vous exprimez, vos pensées sur les questions sans blâmer les autres. Vous prenez des initiatives raisonnables par vous-même, tout en reconnaissant le talent des autres."
+                "fr": "Vous prenez en compte les faits ainsi que les sentiments. Un bon planificateur et fiable, vous êtes également attentif, aux autres. Vous exprimez, vos pensées sur les questions sans blâmer les autres. Vous prenez des initiatives raisonnables par vous-même, tout en reconnaissant le talent des autres."
               }
             },
             {
@@ -919,7 +919,7 @@
               },
               "description": {
                 "en": "You are determined without making use of force. You are positive and encouraging without being demanding. Your style is cooperative rather than dominant. You take responsibility when the situation warrants it, but you prefer to share the decisions.",
-                "fr": "Vous êtes déterminé sans faire pour autant usage de la force. Vous êtes positif et encourageant sans être exigeant. Votre style est coopératif plutôt que dominant. Vous prenez la responsabilité lorsque la situation le justifie, mais vous préférez partagze les décisions."
+                "fr": "Vous êtes déterminé sans faire pour autant usage de la force. Vous êtes positif et encourageant sans être exigeant. Votre style est coopératif plutôt que dominant. Vous prenez la responsabilité lorsque la situation le justifie, mais vous préférez partager les décisions."
               }
             },
             {
@@ -976,7 +976,7 @@
               },
               "description": {
                 "en": "You have the energy to do most things. You find a balance between action and reflection. You stay engaged in the short term but you can pressure over time. You are ambitious but not at all costs. You care what others think.",
-                "fr": "Vous avez l'énergie pour faire la plupart des choses. Vous trouvez un équilibre entre action et réflexion. Vous restez engagé à court terme mais vous pouvez la pression au fil du temps. Vous êtes ambitieux mais pas à tout prix. Vous vous souciez ce que les autres pensent."
+                "fr": "Vous avez l'énergie pour faire la plupart des choses. Vous trouvez un équilibre entre action et réflexion. Vous restez engagé à court terme mais vous pouvez maintenir la pression au fil du temps. Vous êtes ambitieux mais pas à tout prix. Vous vous souciez ce que les autres pensent."
               }
             },
             {

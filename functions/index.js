@@ -10,9 +10,19 @@ Load the sixfactors metadata
 const sixfactors = require('./data/sixfactors');
 
 /*
+List the supported languages
+*/
+const SUPPORTED_LANGS = [ "en", "fr" ];
+
+/*
 Set english as the default language.
 */
 const DEFAULT_LANG = "en";
+
+/*
+Get the injected API key
+*/
+const API_KEY = functions.config().sixfactors.apikey
 
 /*
 	Get the next 6 factors question given the previous question id
@@ -24,6 +34,11 @@ const DEFAULT_LANG = "en";
 exports.sixfactorsGetNextQuestion = functions.https.onRequest((request, response) => {
 
   console.log("sixfactorsGetNextQuestion : " + JSON.stringify(request.query) );
+
+  if( !checkApiKey(request) ) {
+  	badRequest(response, "The API key is not valid.");
+  	return;
+  }
   
   // Grab the chatfuel user ID parameter.
   const userId     = request.query["chatfuel user id"];
@@ -152,6 +167,11 @@ exports.sixfactorsSaveAnswer = functions.https.onRequest((request, response) => 
 
 
   console.log("sixfactorsSaveAnswer : " + JSON.stringify(request.body) );
+
+  if( !checkApiKey(request) ) {
+  	badRequest(response, "The API key is not valid.");
+  	return;
+  }
   
   // Grab the chatfuel user ID parameter.
   const userId     = request.body["chatfuel user id"];
@@ -209,6 +229,11 @@ exports.sixfactorsComputeTestResult = functions.https.onRequest((request, respon
 
 
   console.log("sixfactorsComputeTestResult : " + JSON.stringify(request.query) );
+
+  if( !checkApiKey(request) ) {
+  	badRequest(response, "The API key is not valid.");
+  	return;
+  }
   
   // Grab the chatfuel user ID parameter.
   const userId     = request.query["chatfuel user id"];
@@ -289,11 +314,15 @@ exports.sixfactorsComputeTestResult = functions.https.onRequest((request, respon
 
   	const __getAnalysis = (domain, dimension, score) => {
 
+  		console.log("Get analysis for domain : " + domain + ", dimension : " + dimension + ", score : " + score );
+
   		const levels = sixfactors.analysis[domain].dimensions[dimension].levels;
 
-  		for( level of levels ) {
+  		for( let level of levels ) {
 
-  			if( level.range[0] >= score && level.range[1] <= score ) {
+  			console.log("...checking level : " + JSON.stringify( level ) );
+
+  			if( score >= level.range[0] && score <= level.range[1] ) {
   				return level;
   			}
 
@@ -328,17 +357,11 @@ exports.sixfactorsComputeTestResult = functions.https.onRequest((request, respon
 	response.json( {
 		"set_attributes": 
 		{
-			"orgCasualnessLabel":   analysis["organization"]["casualness"].label[lang],
 			"orgCasualnessDesc":    analysis["organization"]["casualness"].description[lang],
-			"orgToughnessLabel":    analysis["organization"]["toughness"].label[lang],
 			"orgToughnessDesc":     analysis["organization"]["toughness"].description[lang],
-			"intIndependenceLabel": analysis["interaction"]["independence"].label[lang],
 			"intIndependenceDesc":  analysis["interaction"]["independence"].description[lang],
-			"intControllingLabel":  analysis["interaction"]["controlling"].label[lang],
 			"intControllingDesc":   analysis["interaction"]["controlling"].description[lang],
-			"entEnergyLabel":       analysis["enthusiasm"]["energy"].label[lang],
 			"entEnergyDesc":        analysis["enthusiasm"]["energy"].description[lang],
-			"entCreativityLabel":   analysis["enthusiasm"]["creativity"].label[lang],
 			"entCreativityDesc":    analysis["enthusiasm"]["creativity"].description[lang],
 		}
 	} ); 
@@ -408,8 +431,28 @@ function badRequest(response, message) {
 	 - locale : the current user locale 
 */
 function getLang(locale) {
+
+	const lang = locale.substring(0, 2);
+
+	if( SUPPORTED_LANGS.indexOf(lang) === -1 ) {
+		return DEFAULT_LANG;
+	}
+
+	return lang;
+
+}
+
+/*
+	Check the API key
+*/
+function checkApiKey(request) {
+
+	let apiKey = request.query.apikey;
 	
-	return DEFAULT_LANG;
-	//return locale.substring(0, 2);
+	if ( apiKey === undefined ) {
+		apiKey = request.body.apikey;
+	}
+
+	return (API_KEY === apiKey);
 
 }
